@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration Confirmed — RaceDay 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="{{ url_for('index') }}" class="nav-logo">ANGEL'S PIZZA</a>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('register') }}" class="btn-nav">Register Now</a>
+      <!-- <a href="{{ url_for('admin') }}">Admin</a> -->
+    </div>
+  </nav>
+
+  <div class="success-page">
+    <div class="success-icon">🎉</div>
+    <h1>You're In!</h1>
+    <p class="success-sub">Registration confirmed for <strong>{{ reg.first_name }} {{ reg.last_name }}</strong></p>
+
+    <div class="receipt-card">
+      <div class="receipt-header">
+        <span>FUN<strong>RUN</strong> 2026  </span>
+        <span class="receipt-id">#{{ reg.id[-6:].upper() }}</span>
+      </div>
+      <div class="receipt-body">
+        <div class="receipt-row">
+          <span>Category</span>
+          <strong>{{ reg.category }}</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Name</span>
+          <strong>{{ reg.first_name }} {{ reg.last_name }}</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Age / Gender</span>
+          <strong>{{ reg.age }} / {{ reg.gender }}</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Email</span>
+          <strong>{{ reg.email }}</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Phone</span>
+          <strong>{{ reg.phone }}</strong>
+        </div>
+        <div class="receipt-row">
+          <span>T-Shirt Size</span>
+          <strong>{{ reg.tshirt_size }}</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Emergency Contact</span>
+          <strong>{{ reg.emergency_name }} · {{ reg.emergency_phone }}</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Registered On</span>
+          <strong>{{ reg.registered_at.strftime("%B %d, %Y %I:%M %p") }}</strong>
+        </div>
+      </div>
+      <div class="receipt-footer">
+        Present this confirmation on race day to claim your race kit.
+      </div>
+    </div>
+
+    <div class="success-actions">
+      <a href="{{ url_for('index') }}" class="btn-secondary">← Back to Home</a>
+      <button onclick="window.print()" class="btn-primary">🖨 Print Confirmation</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 FUNRUN Running Event · All rights reserved</p>
+  </footer>
+
+</body>
+</html>

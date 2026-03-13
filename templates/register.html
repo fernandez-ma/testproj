@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register — FUN RUN 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="{{ url_for('index') }}" class="nav-logo">ANGEL'S PIZZA</a>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('register') }}" class="btn-nav">Register Now</a>
+      <!-- <a href="{{ url_for('admin') }}">Admin</a> -->
+    </div>
+  </nav>
+
+  <div class="form-page">
+    <div class="form-header">
+      <h1>FUN<span>RUN</span> 2026</h1>
+      <p>Complete all fields to secure your registration slot.</p>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('register') }}" class="reg-form" novalidate>
+
+      <fieldset>
+        <legend>👤 Personal Information</legend>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">First Name *</label>
+            <input type="text" id="first_name" name="first_name" required placeholder="Juan"/>
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name *</label>
+            <input type="text" id="last_name" name="last_name" required placeholder="Dela Cruz"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="age">Age *</label>
+            <input type="number" id="age" name="age" required min="5" max="100" placeholder="25"/>
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender *</label>
+            <select id="gender" name="gender" required>
+              <option value="" disabled selected>Select...</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Non-binary">Non-binary</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>📞 Contact Details</legend>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="juan@email.com"/>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" required placeholder="09XXXXXXXXX"/>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>🏃 Race Details</legend>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="category">Race Category *</label>
+            <select id="category" name="category" required>
+              <option value="" disabled selected>Select distance...</option>
+              <option value="3K Fun Run">3K Fun Run</option>
+              <option value="5K Run">5K Run</option>
+              <option value="10K Run">10K Run</option>
+              <option value="21K Half Marathon">21K Half Marathon</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tshirt_size">T-Shirt Size *</label>
+            <select id="tshirt_size" name="tshirt_size" required>
+              <option value="" disabled selected>Select size...</option>
+              <option value="XS">XS</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>🚨 Emergency Contact</legend>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="emergency_name">Contact Name *</label>
+            <input type="text" id="emergency_name" name="emergency_name" required placeholder="Maria Dela Cruz"/>
+          </div>
+          <div class="form-group">
+            <label for="emergency_phone">Contact Phone *</label>
+            <input type="tel" id="emergency_phone" name="emergency_phone" required placeholder="09XXXXXXXXX"/>
+          </div>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="btn-submit">Confirm Registration →</button>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 FUNRUN Running Event · All rights reserved</p>
+  </footer>
+
+</body>
+</html>

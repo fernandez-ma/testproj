@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ANGEL'S PIZZA FUN RUN 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="nav-logo">ANGEL'S PIZZA</span>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('register') }}" class="btn-nav">Register Now</a>
+      <!-- <a href="{{ url_for('admin') }}">Admin</a> -->
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-bg-lines"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">📍 VALENZUELA PEOPLE'S PARK · MARCH 23, 2026</p>
+      <h1 class="hero-title">FUN<br><span>RUN</span><br>2026</h1>
+      <p class="hero-sub">Choose your distance. Choose your pizza.<br>Register before slots fill up, and fill your stomachs!</p>
+      <a href="{{ url_for('register') }}" class="btn-primary">Secure Your Slot →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="stat-num">{{ 357 + total }}</span>
+        <span class="stat-label">Registered</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">500</span>
+        <span class="stat-label">Total Slots</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">{{ 143 - total }}</span>
+        <span class="stat-label">Remaining</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CATEGORIES -->
+  <section class="categories">
+    <h2 class="section-title">Race Categories</h2>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <span class="cat-icon">🟢</span>
+        <h3>3K Fun Run</h3>
+        <p>Perfect for beginners and families. Flat course, no time limit.</p>
+        <span class="cat-badge">Open to all ages</span>
+      </div>
+      <div class="cat-card featured">
+        <span class="cat-icon">🟡</span>
+        <h3>5K Run</h3>
+        <p>A classic distance for casual runners. Timed with chip technology.</p>
+        <span class="cat-badge">Most popular</span>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">🔴</span>
+        <h3>10K Run</h3>
+        <p>Challenge yourself on a scenic mixed-terrain course.</p>
+        <span class="cat-badge">18 years & above</span>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">⚫</span>
+        <h3>21K Half Marathon</h3>
+        <p>For seasoned runners. Certified course, finisher medal included.</p>
+        <span class="cat-badge">18 years & above</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY COUNTS -->
+  {% if by_cat %}
+  <section class="reg-counts">
+    <h2 class="section-title">Current Registrations</h2>
+    <div class="count-grid">
+      {% for row in by_cat %}
+      <div class="count-bar-wrap">
+        <span class="count-label">{{ row.category }}</span>
+        <div class="count-bar">
+          <div class="count-fill" style="width: {{ [row.cnt * 100 // 125, 100] | min }}%"></div>
+        </div>
+        <span class="count-num">{{ row.cnt }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <h2>Don't miss your spot.</h2>
+    <p>Slots are limited — register now and get your race kit on event day.</p>
+    <a href="{{ url_for('register') }}" class="btn-primary">Register Now →</a>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 FUNRUN Running Event · All rights reserved</p>
+  </footer>
+
+</body>
+</html>

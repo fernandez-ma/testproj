@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — RaceDay 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="{{ url_for('index') }}" class="nav-logo">🏁 RaceDay</a>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('register') }}" class="btn-nav">Register Now</a>
+      <a href="{{ url_for('admin') }}">Admin</a>
+    </div>
+  </nav>
+
+  <div class="admin-page">
+    <div class="admin-header">
+      <h1>Admin Dashboard</h1>
+      <p>All registrations for RaceDay 2025</p>
+    </div>
+
+    <!-- Summary cards -->
+    <div class="admin-stats">
+      <div class="admin-stat-card">
+        <span class="admin-stat-num">{{ total }}</span>
+        <span class="admin-stat-label">Total Registered</span>
+      </div>
+      {% for row in by_cat %}
+      <div class="admin-stat-card">
+        <span class="admin-stat-num">{{ row.cnt }}</span>
+        <span class="admin-stat-label">{{ row.category }}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Search -->
+    <div class="admin-toolbar">
+      <input type="text" id="searchInput" placeholder="🔍  Search by name, email, category..." oninput="filterTable()"/>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table id="regTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Category</th>
+            <th>Shirt</th>
+            <th>Emergency</th>
+            <th>Registered</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in rows %}
+          <tr>
+            <td>{{ r.id[-6:].upper() }}</td>
+            <td><strong>{{ r.first_name }} {{ r.last_name }}</strong></td>
+            <td>{{ r.age }}</td>
+            <td>{{ r.gender }}</td>
+            <td>{{ r.email }}</td>
+            <td>{{ r.phone }}</td>
+            <td><span class="cat-tag cat-{{ r.category | replace('K','') | replace(' ','') | lower }}">{{ r.category }}</span></td>
+            <td>{{ r.tshirt_size }}</td>
+            <td>{{ r.emergency_name }}<br><small>{{ r.emergency_phone }}</small></td>
+            <td><small>{{ r.registered_at.strftime("%b %d, %Y") }}</small></td>
+          </tr>
+          {% else %}
+          <tr><td colspan="10" style="text-align:center;padding:2rem;opacity:.5">No registrations yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 RaceDay Running Event · All rights reserved</p>
+  </footer>
+
+  <script>
+    function filterTable() {
+      const q = document.getElementById("searchInput").value.toLowerCase();
+      document.querySelectorAll("#regTable tbody tr").forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(q) ? "" : "none";
+      });
+    }
+  </script>
+
+</body>
+</html>
