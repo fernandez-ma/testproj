@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🏁 RaceDay — Running Registration Website
 ### Flask + MongoDB Atlas
 
@@ -122,3 +123,7 @@ Open your browser at: http://127.0.0.1:5000
 - No schema.sql needed — MongoDB creates the database and collection on first insert
 - The /admin page has no password — consider adding Flask-Login before going public
 - Receipt IDs show the last 6 characters of the MongoDB ObjectId
+=======
+# testproj
+eee
+>>>>>>> 43ee86a98f771c4cda85818abbdbbf0b222bc6b4
